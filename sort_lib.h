@@ -43,4 +43,3 @@ void quick_sort(std::vector<int>&);
 void bubble_sort(std::vector<int>&);
 
 #endif
-

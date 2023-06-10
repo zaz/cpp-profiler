@@ -43,7 +43,7 @@
 
     <comment type="line">// Output data before sorting</comment>
     <if_stmt><if>if<condition>(<expr><name><name>opts</name><operator>.</operator><name>_output_data</name></name></expr>)</condition>
-        <block>{<block_content> <expr_stmt><expr><name>cout</name> <operator>&lt;&lt;</operator> <literal type="string">"\nData Before: "</literal></expr>;</expr_stmt> <expr_stmt><expr><call><name>output_data</name><argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> </block_content>}</block></if></if_stmt> 
+        <block>{<block_content> <expr_stmt><expr><name>cout</name> <operator>&lt;&lt;</operator> <literal type="string">"\nData Before: "</literal></expr>;</expr_stmt> <expr_stmt><expr><call><name>output_data</name><argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> </block_content>}</block></if></if_stmt>
 
     <comment type="line">// Sort, if a sort was specified, there is no default</comment>
     <if_stmt><if>if <condition>(<expr><name><name>opts</name><operator>.</operator><name>_quick_sort</name></name></expr>)</condition>     <block>{<block_content> <expr_stmt><expr><call><name>quick_sort</name><argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>      </block_content>}</block></if></if_stmt>
@@ -56,7 +56,7 @@
 
     <comment type="line">// Output data after sorting</comment>
     <if_stmt><if>if<condition>(<expr><name><name>opts</name><operator>.</operator><name>_output_sorted_data</name></name></expr>)</condition>
-        <block>{<block_content> <expr_stmt><expr><name>cout</name> <operator>&lt;&lt;</operator> <literal type="string">"\nData After: "</literal></expr>;</expr_stmt> <expr_stmt><expr><call><name>output_data</name><argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> </block_content>}</block></if></if_stmt> 
+        <block>{<block_content> <expr_stmt><expr><name>cout</name> <operator>&lt;&lt;</operator> <literal type="string">"\nData After: "</literal></expr>;</expr_stmt> <expr_stmt><expr><call><name>output_data</name><argument_list>(<argument><expr><name>data</name></expr></argument>)</argument_list></call></expr>;</expr_stmt> </block_content>}</block></if></if_stmt>
 
     <return>return <expr><literal type="number">0</literal></expr>;</return>
 </block_content>}</block></function>
@@ -154,7 +154,7 @@
 <comment type="line">//==============================================================================</comment>
 <function><type><name>void</name></type> <name>output_usage_and_exit</name><parameter_list>(<parameter><decl><type><specifier>const</specifier> <name>string</name><modifier>&amp;</modifier></type> <name>cmd</name></decl></parameter>)</parameter_list>
 <block>{<block_content>
-    <expr_stmt><expr><name>cout</name> <operator>&lt;&lt;</operator> 
+    <expr_stmt><expr><name>cout</name> <operator>&lt;&lt;</operator>
        <literal type="string">"Usage: "</literal> <operator>&lt;&lt;</operator> <name>cmd</name> <operator>&lt;&lt;</operator> <literal type="string">" [options]\n"</literal>
        <literal type="string">"  Options:\n"</literal>
        <literal type="string">"     -sz  int  The number of data items\n"</literal>

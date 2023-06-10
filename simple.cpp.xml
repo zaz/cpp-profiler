@@ -26,7 +26,7 @@
     <decl_stmt><decl><type><name>int</name></type> <name><name>lst</name><index>[<expr><literal type="number">5</literal></expr>]</index></name> <init>= <expr><block>{<expr><literal type="number">2</literal></expr>, <expr><literal type="number">4</literal></expr>, <expr><literal type="number">6</literal></expr>, <expr><literal type="number">8</literal></expr>, <expr><literal type="number">10</literal></expr>}</block></expr></init></decl>;</decl_stmt>
     <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <call><name>search</name><argument_list>(<argument><expr><name>lst</name></expr></argument>, <argument><expr><literal type="number">5</literal></expr></argument>, <argument><expr><literal type="number">6</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
     <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
-    
+
     <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <literal type="string">"Done"</literal></expr>;</expr_stmt>
     <expr_stmt><expr><name><name>std</name><operator>::</operator><name>cout</name></name> <operator>&lt;&lt;</operator> <name><name>std</name><operator>::</operator><name>endl</name></name></expr>;</expr_stmt>
     <return>return <expr><literal type="number">0</literal></expr>;</return>

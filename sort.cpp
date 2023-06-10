@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 
     // Output data before sorting
     if(opts._output_data)
-        { cout << "\nData Before: "; output_data(data); } 
+        { cout << "\nData Before: "; output_data(data); }
 
     // Sort, if a sort was specified, there is no default
     if (opts._quick_sort)     { quick_sort(data);      }
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 
     // Output data after sorting
     if(opts._output_sorted_data)
-        { cout << "\nData After: "; output_data(data); } 
+        { cout << "\nData After: "; output_data(data); }
 
     return 0;
 }
@@ -153,7 +153,7 @@ void process_command_line(Options& opts, int argc, char* argv[])
 //==============================================================================
 void output_usage_and_exit(const string& cmd)
 {
-    cout << 
+    cout <<
        "Usage: " << cmd << " [options]\n"
        "  Options:\n"
        "     -sz  int  The number of data items\n"
@@ -183,4 +183,3 @@ void output_error_and_exit(const string& msg)
 
     exit(1);
 }
-

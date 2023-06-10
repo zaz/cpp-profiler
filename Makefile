@@ -3,7 +3,7 @@
 #
 # CS II Kent State University
 #
-# J. Maletic 
+# J. Maletic
 # Copyright 2023 Kent State University. All rights reserved.
 # srcML 1.0
 #
@@ -27,10 +27,10 @@ msg:
 	@echo '  clean     - Remove executables and .o.'
 
 ###############################################################
-profiler: main.o ASTree.o 
+profiler: main.o ASTree.o
 	$(CPP) $(CPP_OPTS) -o profiler main.o ASTree.o
-  
-main.o: main.cpp ASTree.hpp 
+
+main.o: main.cpp ASTree.hpp
 	$(CPP) $(CPP_OPTS) -c main.cpp
 
 ASTree.o: ASTree.hpp ASTree.cpp
@@ -47,7 +47,7 @@ profile.o: profile.hpp profile.cpp
 #==============================================================
 # p-simple
 p-simple: p-simple.o profile.o
-	$(CPP) $(CPP_OPTS) -o p-simple p-simple.o profile.o 
+	$(CPP) $(CPP_OPTS) -o p-simple p-simple.o profile.o
 
 p-simple.o: p-simple.cpp profile.hpp
 	$(CPP) $(CPP_OPTS) -c p-simple.cpp

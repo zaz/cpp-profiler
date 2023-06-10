@@ -9,7 +9,6 @@
 //
 //  Modified by:
 //
-//
 
 #include "ASTree.hpp"
 
@@ -19,7 +18,7 @@
 srcML::srcML(const srcML& actual) {
     header = actual.header;
     if (actual.tree)
-        tree   = new AST(*(actual.tree));
+        tree = new AST(*(actual.tree));
     else
         tree = 0;
 }
@@ -30,7 +29,7 @@ void srcML::swap(srcML& b) {
     std::string t_header = header;
     header = b.header;
     b.header = t_header;
-    
+
     AST *temp = tree;
     tree = b.tree;
     b.tree = temp;
@@ -94,12 +93,10 @@ void srcML::lineCount(const std::string& profileName) {
     tree->lineCount(profileName);
 }
 
-    
 
 //
 //AST::
 //
-
 
 // Constructs a category, token, or whitespace node for the tree.
 //
@@ -209,7 +206,6 @@ void AST::mainHeader(const std::vector<std::string>& profileName,
 //      example: extern profile thisfile_cpp;
 //
 void AST::fileHeader(const std::string& profileName) {
-
     //TODO: IMPLEMENT
     //Skip down a couple lines or find first function and put it before it
     //Add #include "profile.hpp"
@@ -221,7 +217,6 @@ void AST::fileHeader(const std::string& profileName) {
 // Assumes only one return in the main
 //
 void AST::mainReport(const std::vector<std::string>& profileName) {
-    
     //TODO: IMPLEMENT
     //Find the function with name of "main" in the file
     // -Get the "block" node of this function
@@ -229,7 +224,6 @@ void AST::mainReport(const std::vector<std::string>& profileName) {
     // -Decrement it once (to skip the "}")
     // -Search backwards for a "return" tag
     // -Insert the report statements before the return
-
 }
 
 
@@ -238,7 +232,6 @@ void AST::mainReport(const std::vector<std::string>& profileName) {
 //  Assumes no nested functions
 //
 void AST::functionCount(const std::string& profileName) {
-    
     //TODO: IMPLEMENT
     // for each child in the "unit"
     //     if child is a function, constructor, destructor
@@ -246,7 +239,6 @@ void AST::functionCount(const std::string& profileName) {
     //        Find <block>, then find <block_content>
     //        Insert the count as first child in <block_content>
     //        Example: main1_cpp.count(__LINE__, "main");
-
 }
 
 
@@ -255,7 +247,6 @@ void AST::functionCount(const std::string& profileName) {
 //   Assumes all construts (for, while, if) have an explicit block { }
 //
 void AST::lineCount(const std::string& profileName) {
-    
     //TODO: IMPLEMENT
     // Recursively check for expr_stmt within all category nodes <block>
     // Very similar to AST::print
@@ -265,7 +256,6 @@ void AST::lineCount(const std::string& profileName) {
     //          Example: foo_cpp.count(__LINE__);
     //       Else call lineCount if not a stop tag  See isStopTag()
     //   Else (token or whitespace) do nothing
-    
 }
 
 // Returns TRUE if the tag (syntactic category) is not to be profiled
@@ -306,7 +296,7 @@ std::ostream& AST::print(std::ostream& out) const {
 
 
 // Read in and construct AST
-// REQUIRES: '>' was previous charater read 
+// REQUIRES: '>' was previous charater read
 //           && this == new AST(category, "TagName")
 //
 std::istream& AST::read(std::istream& in) {
@@ -399,5 +389,3 @@ std::vector<std::string> tokenize(const std::string& s) {
     }
     return result;
 }
-    
-

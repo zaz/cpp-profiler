@@ -9,7 +9,6 @@
 //
 //  Modified by:
 //
-//
 
 #ifndef INCLUDES_ASTree_H_
 #define INCLUDES_ASTree_H_
@@ -67,7 +66,7 @@ public:
     void          lineCount     (const std::string&);
     std::ostream& print         (std::ostream&) const;
     std::istream& read          (std::istream&);
-    
+
 private:
     nodes           nodeType;       //Category, Token, or Whitespace
     std::string     tag,            //Category: the tag name and
@@ -93,10 +92,10 @@ public:
     void    mainReport    (const std::vector<std::string>&);
     void    functionCount (const std::string&);
     void    lineCount     (const std::string&);
-    
+
     friend  std::istream& operator>>(std::istream&, srcML&);
-    friend  std::ostream& operator<<(std::ostream&, const srcML&); 
-    
+    friend  std::ostream& operator<<(std::ostream&, const srcML&);
+
 private:
     std::string header;
     AST*        tree;

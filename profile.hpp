@@ -28,13 +28,13 @@ std::string intToString(long);
 //  20 bar       2
 //  5 main       1
 //  11           5
-// 
+//
 class profile {
 public:
            profile (std::string fn="") : filename(fn)      {};
     void   count   (int line, const std::string& function) { stmt[intToString(line) + " " + function] += 1; }
     void   count   (int line)                              { stmt[intToString(line)] += 1; }
-    
+
     friend std::ostream& operator<< (std::ostream&, const profile&);
 private:
     std::string                 filename;
