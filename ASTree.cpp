@@ -132,11 +132,9 @@ AST::AST(const AST& actual) {
     this->tag = actual.tag;
     this->closeTag = actual.closeTag;
     this->text = actual.text;
-    if (!actual.child.empty()) {
-        for (auto const& child : actual.child) {
-            AST* temp = new AST(*child);
-            this->child.push_back(temp);
-        }
+    for (auto const& child : actual.child) {
+        AST* temp = new AST(*child);
+        this->child.push_back(temp);
     }
 }
 
