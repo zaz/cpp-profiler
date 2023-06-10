@@ -7,7 +7,7 @@
 //  Spring 2023
 //  srcML 1.0
 //
-//  Modified by:
+//  Modified by: Zaz Brown
 //
 
 #include <iostream>
@@ -92,6 +92,12 @@ int main(int argc, char *argv[]) {
         outFile << code << std::endl;
         outFile.close();
     }
+
+    std::cout << "The code in main: " <<std::endl;
+    std::cout << "------------------------------------------------" <<std::endl;
+    std::cout << code << std::endl;
+    std::cout << "------------------------------------------------" <<std::endl;
+    testCopyAssign(code);
 
     return 0;
 }
