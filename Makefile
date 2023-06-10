@@ -5,9 +5,10 @@
 #
 # J. Maletic
 # Copyright 2023 Kent State University. All rights reserved.
+# Spring 2023
 # srcML 1.0
 #
-# Spring 2023
+# Modified by: Zaz Brown
 #
 
 
@@ -25,6 +26,7 @@ msg:
 	@echo '  sort      - Compile sort code.        '
 	@echo '  p-sort    - Compile p-sort code.      '
 	@echo '  clean     - Remove executables and .o.'
+	@echo '  check     - Tests for memory leaks using Valgrind.'
 
 ###############################################################
 profiler: main.o ASTree.o
@@ -88,3 +90,6 @@ clean:
 	rm -f *.o
 	rm -f p-*
 
+check:
+	valgrind --leak-check=full --error-exitcode=1 --quiet \
+	         --show-possibly-lost=no ./profiler simple.cpp.xml >/dev/null
