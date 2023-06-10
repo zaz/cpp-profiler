@@ -7,7 +7,7 @@
 //  Spring 2023
 //  srcML 1.0
 //
-//  Modified by:
+//  Modified by: Zaz Brown
 //
 
 #include "ASTree.hpp"
@@ -125,12 +125,19 @@ AST::~AST() {
 
 
 // Copy Constructor for AST
+// Recursively traverse actual and copy each node into this.
 //
 AST::AST(const AST& actual) {
-    //TODO: IMPLEMENT
-    //Recursively traverse actual and
-    //make a copy of each node putting it
-    //into this.
+    this->nodeType = actual.nodeType;
+    this->tag = actual.tag;
+    this->closeTag = actual.closeTag;
+    this->text = actual.text;
+    if (!actual.child.empty()) {
+        for (auto const& child : actual.child) {
+            AST* temp = new AST(*child);
+            this->child.push_back(temp);
+        }
+    }
 }
 
 
