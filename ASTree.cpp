@@ -117,10 +117,12 @@ AST::AST(nodes t, const std::string& s) {
 
 
 // Destructor for AST
+// Recursively traverse tree and delete from bottom up.
 //
 AST::~AST() {
-    //TODO: IMPLEMENT
-    //Recursively traverse tree and delete from bottom up
+    for (auto const& child : child) {
+        delete child;
+    }
 }
 
 
