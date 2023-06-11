@@ -33,14 +33,20 @@ void testCopyAssign(srcML p, std::string codeText) {
     emptyCodeStream << p;
     REQUIRE(emptyCodeStream.str() == "");
 
-    std::cout << "Foo: " <<std::endl;
+    std::stringstream fooStream;
+    std::ifstream fooFile("foo.cpp");
+    fooStream << fooFile.rdbuf();
+    fooFile.close();
+
     srcML foo;
     std::ifstream inFile("foo.cpp.xml");
     inFile >> foo;
     inFile.close();
-    p.swap(foo);
-    std::cout << p;
-    std::cout << "------------------------------------------------" <<std::endl;
+
+    std::stringstream fooParsedStream;
+    fooParsedStream << foo;
+
+    REQUIRE(fooStream.str() == fooParsedStream.str());
 }
 
 void testCopyAssignAST() {
