@@ -39,6 +39,15 @@ void testCopyAssign(srcML p) {
     std::cout << "------------------------------------------------" <<std::endl;
 }
 
+void testCopyAssignAST() {
+    AST astA = AST(token, "a");
+    AST astB = AST(token, "b");
+    AST astAB = AST();
+    // create astAB with two elements in child: astA and astB
+    astAB.child.push_back(&astA);
+    astAB.child.push_back(&astB);
+}
+
 
 // Input:  One or more srcML files, main must be first file
 // Output: One or more cpp files (with p- prefix) that are instrumented
@@ -106,6 +115,7 @@ int main(int argc, char *argv[]) {
     std::cout << code << std::endl;
     std::cout << "------------------------------------------------" <<std::endl;
     testCopyAssign(code);
+    testCopyAssignAST();
 
     return 0;
 }
