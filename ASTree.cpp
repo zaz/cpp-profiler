@@ -145,8 +145,6 @@ AST::AST(const AST& actual) {
 // Swap all the top level childern (pointers to AST)
 //
 void AST::swap(AST& rhs) {
-    std::cout << "SWAPPING !!!!!!!!!!";
-    assert(this->child.size() == rhs.child.size());
     using std::swap;
 
     swap(nodeType, rhs.nodeType);
