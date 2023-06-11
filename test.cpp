@@ -32,22 +32,9 @@ void testCopyAssign(srcML p, std::string codeText) {
     std::stringstream emptyCodeStream;
     emptyCodeStream << p;
     REQUIRE(emptyCodeStream.str() == "");
-
-    std::stringstream fooStream;
-    std::ifstream fooFile("foo.cpp");
-    fooStream << fooFile.rdbuf();
-    fooFile.close();
-
-    srcML foo;
-    std::ifstream inFile("foo.cpp.xml");
-    inFile >> foo;
-    inFile.close();
-
-    std::stringstream fooParsedStream;
-    fooParsedStream << foo;
-
-    REQUIRE(fooStream.str() == fooParsedStream.str());
 }
+
+
 
 void testCopyAssignAST() {
     std::string a = "ayy";
@@ -129,4 +116,21 @@ TEST_CASE("monolithic test") {
     std::cout << "!!!!!!!!!!!!!!!!" <<std::endl;
     testCopyAssign(code, codeText.str());
     testCopyAssignAST();
+}
+
+TEST_CASE("test parsing of foo and srcML::swap") {
+    std::stringstream fooStream;
+    std::ifstream fooFile("foo.cpp");
+    fooStream << fooFile.rdbuf();
+    fooFile.close();
+
+    srcML foo;
+    std::ifstream inFile("foo.cpp.xml");
+    inFile >> foo;
+    inFile.close();
+
+    std::stringstream fooParsedStream;
+    fooParsedStream << foo;
+
+    REQUIRE(fooStream.str() == fooParsedStream.str());
 }
