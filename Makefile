@@ -34,7 +34,7 @@ profiler: main.o ASTree.o
 	$(CPP) $(CPP_OPTS) -o profiler main.o ASTree.o
 
 test: test.o ASTree.o
-	$(CPP) $(CPP_OPTS) -o profiler test.o ASTree.o
+	$(CPP) $(CPP_OPTS) -o test test.o ASTree.o
 
 main.o: main.cpp ASTree.hpp
 	$(CPP) $(CPP_OPTS) -c main.cpp
@@ -93,6 +93,7 @@ p-sort_lib.o: profile.hpp sort_lib.h p-sort_lib.cpp
 #This will clean up everything via "make clean"
 clean:
 	rm -f profiler
+	rm -f test
 	rm -f sort
 	rm -f *.o
 	rm -f p-*
