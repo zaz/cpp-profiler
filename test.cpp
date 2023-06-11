@@ -1,5 +1,5 @@
 //
-//  main.cpp
+//  test.cpp
 //  Profiler
 //
 //  Created by Jonathan Maletic.
@@ -10,7 +10,9 @@
 //  Modified by: Zaz Brown
 //
 
+#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -21,7 +23,11 @@
 
 // Simple function to exercise/test copy-ctor, dtor, swap, assignment.
 //
-void testCopyAssign(srcML p) {
+void testCopyAssign(srcML p, std::string codeText) {
+    std::stringstream copiedCodeStream;
+    copiedCodeStream << p;
+    std::string copiedCodeText = copiedCodeStream.str();
+    REQUIRE(copiedCodeText == codeText);
     std::cout << "The orginal code: " <<std::endl;
     std::cout << "------------------------------------------------" <<std::endl;
     std::cout << p;   //Should print out same code as printed in main.
@@ -63,32 +69,23 @@ void testCopyAssignAST() {
 // Example: profile main.cpp.xml utils.cpp.xml
 // Results: p-main.cpp p-utlis.cpp
 //
-int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        std::cerr << "Error: Input file(s) are required." << std::endl;
-        std::cerr << "       The main must be the first argument followed by ";
-        std::cerr << "any other .cpp files.  For example:" << std::endl;
-        std::cerr << "profiler main.cpp.xml file1.cpp.xml file2.cpp.xml";
-        std::cerr << std::endl << std::endl;
-        return(1);
-    }
 
-    srcML                     code;           //Source code to be profiled.
-    std::vector<std::string>  inputName;      //Input file names (foo.cpp.xml)
-    std::vector<std::string>  fileName;       //File names       (foo.cpp)
-    std::vector<std::string>  profileName;    //Profile names    (foo_cpp)
+TEST_CASE("monolithic test") {
+    srcML                     code;         //Source code to be profiled.
+    std::vector<std::string>  inputName   = {"simple.cpp.xml"};
+    std::vector<std::string>  fileName    = {"simple.cpp"};
+    std::vector<std::string>  profileName = {"simple_cpp"};
 
-    for (int i = 1; i < argc; ++i) {
-        std::string temp;
-        temp = argv[i];                                   //Get foo.cpp.xml
-        inputName.push_back(temp);                        //Put in list
-        temp = temp.substr(0, temp.find(".xml"));         //Remove .xml
-        fileName.push_back(temp);                         //Put in list
-        std::replace(temp.begin(), temp.end(), '.', '_'); //convert . to _
-        profileName.push_back(temp);                      //Put in list
-    }
+    //std::string temp = "simple.cpp.xml";
+    //inputName.push_back(temp);                        //Put in list
 
-    std::ifstream inFile(inputName[0].c_str());    //Read in the main
+    std::string in0 = inputName[0];
+    std::string temp = in0.substr(0, in0.find(".xml"));         //Remove .xml
+    fileName.push_back(temp);                         //Put in list
+    std::replace(temp.begin(), temp.end(), '.', '_'); //convert . to _
+    profileName.push_back(temp);                      //Put in list
+
+    std::ifstream inFile(in0.c_str());    //Read in the main
     inFile >> code;
     inFile.close();
 
@@ -122,8 +119,10 @@ int main(int argc, char *argv[]) {
     std::cout << "------------------------------------------------" <<std::endl;
     std::cout << code << std::endl;
     std::cout << "------------------------------------------------" <<std::endl;
-    testCopyAssign(code);
+    std::stringstream codeText;
+    codeText << code;
+    std::cout << codeText.str() << std::endl;
+    std::cout << "!!!!!!!!!!!!!!!!" <<std::endl;
+    testCopyAssign(code, codeText.str());
     testCopyAssignAST();
-
-    return 0;
 }
