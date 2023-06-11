@@ -28,9 +28,11 @@ void testCopyAssign(srcML p, std::string codeText) {
     copiedCodeStream << p;
     std::string copiedCodeText = copiedCodeStream.str();
     REQUIRE(copiedCodeText == codeText);
-    p = srcML();      //Should print out nothing.
-    std::cout << p;
-    std::cout << "------------------------------------------------" <<std::endl;
+    p = srcML();
+    std::stringstream emptyCodeStream;
+    emptyCodeStream << p;
+    REQUIRE(emptyCodeStream.str() == "");
+
     std::cout << "Foo: " <<std::endl;
     srcML foo;
     std::ifstream inFile("foo.cpp.xml");
