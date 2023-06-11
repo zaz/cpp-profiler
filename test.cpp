@@ -10,7 +10,7 @@
 //  Modified by: Zaz Brown
 //
 
-#include "catch2/catch_test_macros.hpp"
+#include "catch.hpp"
 #include <iostream>
 #include <fstream>
 #include <vector>
