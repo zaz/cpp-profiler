@@ -22,34 +22,23 @@
 #include "ASTree.hpp"
 
 // Simple function to exercise/test copy-ctor, dtor, swap, assignment.
-//
 void testCopyAssign(srcML p, std::string codeText) {
     std::stringstream copiedCodeStream;
     copiedCodeStream << p;
     std::string copiedCodeText = copiedCodeStream.str();
     REQUIRE(copiedCodeText == codeText);
+
     p = srcML();
     std::stringstream emptyCodeStream;
     emptyCodeStream << p;
     REQUIRE(emptyCodeStream.str() == "");
 }
 
-
-// Input:  One or more srcML files, main must be first file
-// Output: One or more cpp files (with p- prefix) that are instrumented
-//
-// Example: profile main.cpp.xml utils.cpp.xml
-// Results: p-main.cpp p-utlis.cpp
-//
-
 TEST_CASE("monolithic test") {
-    srcML                     code;         //Source code to be profiled.
-    std::vector<std::string>  inputName   = {"simple.cpp.xml"};
+    srcML                     code;       //Source code to be profiled.
+    std::vector<std::string>  inputName = {"simple.cpp.xml"};
     std::vector<std::string>  fileName;
     std::vector<std::string>  profileName;
-
-    //std::string temp = "simple.cpp.xml";
-    //inputName.push_back(temp);                        //Put in list
 
     for (auto const& input : inputName) {
         std::string temp = input.substr(0, input.find(".xml"));  //Remove .xml
