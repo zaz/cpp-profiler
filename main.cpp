@@ -33,7 +33,7 @@ void testCopyAssign(srcML p) {
 
 
 // Input:  One or more srcML files, main must be first file
-// Output: One or more cpp files (with p- prefix) that are insturmented
+// Output: One or more cpp files (with p- prefix) that are instrumented
 //
 // Example: profile main.cpp.xml utils.cpp.xml
 // Results: p-main.cpp p-utlis.cpp
