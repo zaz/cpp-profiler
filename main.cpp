@@ -44,9 +44,9 @@ void testCopyAssignAST() {
     std::string b = "bee";
     std::string c = "sea";
 
-    std::unique_ptr<AST> astA(new AST(token, a));
-    std::unique_ptr<AST> astB(new AST(token, b));
-    std::unique_ptr<AST> astC(new AST(token, c));
+    auto astA = std::make_unique<AST>(token, a);
+    auto astB = std::make_unique<AST>(token, b);
+    auto astC = std::make_unique<AST>(token, c);
     AST astAB = AST(category, "ayybees");
     // create astAB with two elements in child: astA and astB
     astAB.child.push_back(std::move(astA));
