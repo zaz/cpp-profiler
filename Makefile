@@ -26,14 +26,21 @@ msg:
 	@echo '  sort      - Compile sort code.        '
 	@echo '  p-sort    - Compile p-sort code.      '
 	@echo '  clean     - Remove executables and .o.'
+	@echo '  test      - Compile tests.'
 	@echo '  check     - Tests for memory leaks using Valgrind.'
 
 ###############################################################
 profiler: main.o ASTree.o
 	$(CPP) $(CPP_OPTS) -o profiler main.o ASTree.o
 
+test: test.o ASTree.o
+	$(CPP) $(CPP_OPTS) -o profiler test.o ASTree.o
+
 main.o: main.cpp ASTree.hpp
 	$(CPP) $(CPP_OPTS) -c main.cpp
+
+test.o: test.cpp ASTree.hpp
+	$(CPP) $(CPP_OPTS) -c test.cpp
 
 ASTree.o: ASTree.hpp ASTree.cpp
 	$(CPP) $(CPP_OPTS) -c ASTree.cpp
