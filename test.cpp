@@ -28,11 +28,6 @@ void testCopyAssign(srcML p, std::string codeText) {
     copiedCodeStream << p;
     std::string copiedCodeText = copiedCodeStream.str();
     REQUIRE(copiedCodeText == codeText);
-    std::cout << "The orginal code: " <<std::endl;
-    std::cout << "------------------------------------------------" <<std::endl;
-    std::cout << p;   //Should print out same code as printed in main.
-    std::cout << "------------------------------------------------" <<std::endl;
-    std::cout << "No code: " <<std::endl;
     p = srcML();      //Should print out nothing.
     std::cout << p;
     std::cout << "------------------------------------------------" <<std::endl;
