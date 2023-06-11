@@ -142,10 +142,18 @@ AST::AST(const AST& actual) {
 
 
 // Constant time swap for AST
+// Swap all the top level childern (pointers to AST)
 //
 void AST::swap(AST& rhs) {
-    //TODO: IMPLEMENT
-    //Swap all the top level childern (pointers to AST)
+    std::cout << "SWAPPING !!!!!!!!!!";
+    assert(this->child.size() == rhs.child.size());
+    using std::swap;
+
+    swap(nodeType, rhs.nodeType);
+    swap(tag, rhs.tag);
+    swap(closeTag, rhs.closeTag);
+    swap(text, rhs.text);
+    swap(child, rhs.child);
 }
 
 /// Assignment for AST
