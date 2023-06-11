@@ -133,4 +133,14 @@ TEST_CASE("test parsing of foo and srcML::swap") {
     fooParsedStream << foo;
 
     REQUIRE(fooStream.str() == fooParsedStream.str());
+
+    srcML initiallyEmpty;
+    initiallyEmpty.swap(foo);
+    std::stringstream parsedStreamForInitiallyEmpty;
+    parsedStreamForInitiallyEmpty << initiallyEmpty;
+    REQUIRE(fooStream.str() == parsedStreamForInitiallyEmpty.str());
+
+    std::stringstream fooParsedStreamNowEmpty;
+    fooParsedStreamNowEmpty << foo;
+    REQUIRE("" == fooParsedStreamNowEmpty.str());
 }
