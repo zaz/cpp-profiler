@@ -52,6 +52,9 @@ void testCopyAssignAST() {
     astAB.child.push_back(astB);
     // swap astAB and astA
     astAB.swap(*astC);
+    delete astA;
+    delete astB;
+    delete astC;
 }
 
 
