@@ -35,24 +35,6 @@ void testCopyAssign(srcML p, std::string codeText) {
 }
 
 
-
-void testCopyAssignAST() {
-    std::string a = "ayy";
-    std::string b = "bee";
-    std::string c = "sea";
-
-    auto astA = std::make_unique<AST>(token, a);
-    auto astB = std::make_unique<AST>(token, b);
-    auto astC = std::make_unique<AST>(token, c);
-    AST astAB = AST(category, "ayybees");
-    // create astAB with two elements in child: astA and astB
-    astAB.child.push_back(std::move(astA));
-    astAB.child.push_back(std::move(astB));
-    // swap astAB and astA
-    astAB.swap(*astC);
-}
-
-
 // Input:  One or more srcML files, main must be first file
 // Output: One or more cpp files (with p- prefix) that are instrumented
 //
@@ -115,7 +97,6 @@ TEST_CASE("monolithic test") {
     std::cout << codeText.str() << std::endl;
     std::cout << "!!!!!!!!!!!!!!!!" <<std::endl;
     testCopyAssign(code, codeText.str());
-    testCopyAssignAST();
 }
 
 TEST_CASE("test parsing of foo and srcML::swap") {
@@ -143,4 +124,20 @@ TEST_CASE("test parsing of foo and srcML::swap") {
     std::stringstream fooParsedStreamNowEmpty;
     fooParsedStreamNowEmpty << foo;
     REQUIRE("" == fooParsedStreamNowEmpty.str());
+}
+
+TEST_CASE("test copy assign AST") {
+    std::string a = "ayy";
+    std::string b = "bee";
+    std::string c = "sea";
+
+    auto astA = std::make_unique<AST>(token, a);
+    auto astB = std::make_unique<AST>(token, b);
+    auto astC = std::make_unique<AST>(token, c);
+    AST astAB = AST(category, "ayybees");
+    // create astAB with two elements in child: astA and astB
+    astAB.child.push_back(std::move(astA));
+    astAB.child.push_back(std::move(astB));
+    // swap astAB and astA
+    astAB.swap(*astC);
 }
