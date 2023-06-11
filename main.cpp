@@ -43,18 +43,16 @@ void testCopyAssignAST() {
     std::string a = "ayy";
     std::string b = "bee";
     std::string c = "sea";
-    AST *astA = new AST(token, a);
-    AST *astB = new AST(token, b);
-    AST *astC = new AST(token, c);
+
+    std::unique_ptr<AST> astA(new AST(token, a));
+    std::unique_ptr<AST> astB(new AST(token, b));
+    std::unique_ptr<AST> astC(new AST(token, c));
     AST astAB = AST(category, "ayybees");
     // create astAB with two elements in child: astA and astB
-    astAB.child.push_back(astA);
-    astAB.child.push_back(astB);
+    astAB.child.push_back(std::move(astA));
+    astAB.child.push_back(std::move(astB));
     // swap astAB and astA
     astAB.swap(*astC);
-    delete astA;
-    delete astB;
-    delete astC;
 }
 
 

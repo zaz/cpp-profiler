@@ -21,6 +21,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <memory>
 
 
 bool                     isStopTag (std::string);
@@ -48,31 +49,31 @@ enum nodes {category, token, whitespace};
 //
 class AST {
 public:
-                  AST           () {};
-                  AST           (nodes t) : nodeType(t) {};
-                  AST           (nodes t, const std::string&);
-                  ~AST          ();
-                  AST           (const AST&);
-    void          swap          (AST&);
-    AST&          operator=     (AST);
+                         AST           () {};
+                         AST           (nodes t) : nodeType(t) {};
+                         AST           (nodes t, const std::string&);
+                         ~AST          ();
+                         AST           (const AST&);
+    void                 swap          (AST&);
+    AST&                 operator=     (AST);
 
-    AST*          getChild      (std::string);
-    std::string   getName       () const;
-    void          mainHeader    (const std::vector<std::string>&,
-                                 const std::vector<std::string>&);
-    void          fileHeader    (const std::string&);
-    void          mainReport    (const std::vector<std::string>&);
-    void          functionCount (const std::string&);
-    void          lineCount     (const std::string&);
-    std::ostream& print         (std::ostream&) const;
-    std::istream& read          (std::istream&);
+    std::unique_ptr<AST> getChild      (std::string);
+    std::string          getName       () const;
+    void                 mainHeader    (const std::vector<std::string>&,
+                                        const std::vector<std::string>&);
+    void                 fileHeader    (const std::string&);
+    void                 mainReport    (const std::vector<std::string>&);
+    void                 functionCount (const std::string&);
+    void                 lineCount     (const std::string&);
+    std::ostream&        print         (std::ostream&) const;
+    std::istream&        read          (std::istream&);
 
 // private:
-    nodes           nodeType;       //Category, Token, or Whitespace
-    std::string     tag,            //Category: the tag name and
-                    closeTag;       //          closing tag.
-    std::list<AST*> child;          //Category: A list of subtrees.
-    std::string     text;           //Token/Whitespace: the text.
+    nodes                           nodeType;   //Category, Token, or Whitespace
+    std::string                     tag,        //Category: the tag name and
+                                    closeTag;   //          closing tag.
+    std::list<std::unique_ptr<AST>> child;      //Category: A list of subtrees.
+    std::string                     text;       //Token/Whitespace: the text.
 };
 
 
