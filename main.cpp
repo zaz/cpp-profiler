@@ -29,6 +29,14 @@ void testCopyAssign(srcML p) {
     p = srcML();      //Should print out nothing.
     std::cout << p;
     std::cout << "------------------------------------------------" <<std::endl;
+    std::cout << "Foo: " <<std::endl;
+    srcML foo;
+    std::ifstream inFile("foo.cpp.xml");
+    inFile >> foo;
+    inFile.close();
+    p.swap(foo);
+    std::cout << p;
+    std::cout << "------------------------------------------------" <<std::endl;
 }
 
 
