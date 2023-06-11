@@ -67,7 +67,7 @@ public:
     std::ostream& print         (std::ostream&) const;
     std::istream& read          (std::istream&);
 
-private:
+// private:
     nodes           nodeType;       //Category, Token, or Whitespace
     std::string     tag,            //Category: the tag name and
                     closeTag;       //          closing tag.
