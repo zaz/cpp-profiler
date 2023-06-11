@@ -73,19 +73,20 @@ void testCopyAssignAST() {
 TEST_CASE("monolithic test") {
     srcML                     code;         //Source code to be profiled.
     std::vector<std::string>  inputName   = {"simple.cpp.xml"};
-    std::vector<std::string>  fileName    = {"simple.cpp"};
-    std::vector<std::string>  profileName = {"simple_cpp"};
+    std::vector<std::string>  fileName;
+    std::vector<std::string>  profileName;
 
     //std::string temp = "simple.cpp.xml";
     //inputName.push_back(temp);                        //Put in list
 
-    std::string in0 = inputName[0];
-    std::string temp = in0.substr(0, in0.find(".xml"));         //Remove .xml
-    fileName.push_back(temp);                         //Put in list
-    std::replace(temp.begin(), temp.end(), '.', '_'); //convert . to _
-    profileName.push_back(temp);                      //Put in list
+    for (auto const& input : inputName) {
+        std::string temp = input.substr(0, input.find(".xml"));  //Remove .xml
+        fileName.push_back(temp);                                //Put in list
+        std::replace(temp.begin(), temp.end(), '.', '_');        //convert . to _
+        profileName.push_back(temp);                             //Put in list
+    }
 
-    std::ifstream inFile(in0.c_str());    //Read in the main
+    std::ifstream inFile(inputName[0].c_str());    //Read in the main
     inFile >> code;
     inFile.close();
 
