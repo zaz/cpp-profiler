@@ -77,14 +77,8 @@ TEST_CASE("monolithic test") {
         outFile.close();
     }
 
-    std::cout << "The code in main: " <<std::endl;
-    std::cout << "------------------------------------------------" <<std::endl;
-    std::cout << code << std::endl;
-    std::cout << "------------------------------------------------" <<std::endl;
     std::stringstream codeText;
     codeText << code;
-    std::cout << codeText.str() << std::endl;
-    std::cout << "!!!!!!!!!!!!!!!!" <<std::endl;
     testCopyAssign(code, codeText.str());
 }
 
