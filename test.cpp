@@ -43,7 +43,7 @@ TEST_CASE("monolithic test") {
     std::vector<std::string>           profileNames;
 
     for (auto const& path : inFilePaths) {
-        std::filesystem::path xmlFilePath = path;
+        auto xmlFilePath = path;
         xmlFilePath += ".xml";
         xmlFilePaths.push_back(xmlFilePath);
 
