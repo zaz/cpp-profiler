@@ -129,12 +129,10 @@ TEST_CASE("AST") {
     astAB->child.push_back(std::move(astB));
 
     SECTION("AST::getChild") {
-        std::shared_ptr<AST> childAn;
-        childAn = astC->getChild(a);
+        std::shared_ptr<AST> childAn = astC->getChild(a);
         REQUIRE(childAn == nullptr);
 
-        std::shared_ptr<AST> childA;
-        childA = astAB->getChild(a);
+        std::shared_ptr<AST> childA = astAB->getChild(a);
         REQUIRE(childA != nullptr);
         REQUIRE(childA->tag == a);
     }
@@ -144,21 +142,18 @@ TEST_CASE("AST") {
         astAB->swap(*astC);
 
         // astAB should now be leaf "sea"
-        std::shared_ptr<AST> childAfromAB;
-        childAfromAB = astAB->getChild(a);
+        std::shared_ptr<AST> childAfromAB = astAB->getChild(a);
         REQUIRE(childAfromAB == nullptr);
 
         // astC should now be "ayybees", containing astA and astB
-        std::shared_ptr<AST> childAfromC;
-        childAfromC = astC->getChild(a);
+        std::shared_ptr<AST> childAfromC = astC->getChild(a);
         REQUIRE(childAfromC != nullptr);
         REQUIRE(childAfromC->tag == a);
     }
 
     SECTION("AST::=") {
         std::shared_ptr<AST> astCopy = astAB;
-        std::shared_ptr<AST> copyChild;
-        copyChild = astCopy->getChild(a);
+        std::shared_ptr<AST> copyChild = astCopy->getChild(a);
         REQUIRE(copyChild != nullptr);
         REQUIRE(copyChild->tag == a);
     }
