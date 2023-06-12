@@ -60,6 +60,7 @@ int main() {
 - [ ] Make sure insertion of the code works properly (manually inspect).
 - [ ] The output (~p-simple.cpp~) should compile and run.
 
-* TODOs [0/2]
+* TODOs [0/3]
+- [ ] Refactor "monolithic test", possibly by creating a function ~profile(std::vector<std::string> inputs)~.
 - [ ] Test that ~AST::swap~ executes in constant time.
 - [ ] Look into using ~std::filesystem~ instead of ~std::ifstream~
