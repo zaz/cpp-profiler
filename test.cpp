@@ -109,7 +109,7 @@ TEST_CASE("test parsing of foo and srcML::swap") {
     REQUIRE("" == fooParsedStreamNowEmpty.str());
 }
 
-TEST_CASE("test copy assign AST") {
+TEST_CASE("test AST::getChild and copy assign") {
     std::string a = "ayy";
     std::string b = "bee";
     std::string c = "sea";
@@ -122,6 +122,15 @@ TEST_CASE("test copy assign AST") {
     auto astAB = std::make_unique<AST>(category, "ayybees");
     astAB->child.push_back(std::move(astA));
     astAB->child.push_back(std::move(astB));
+
+    std::unique_ptr<AST> childAn;
+    childAn = astC->getChild(a);
+    REQUIRE(childAn == nullptr);
+
+    std::unique_ptr<AST> childA;
+    childA = astAB->getChild(a);
+    REQUIRE(childA != nullptr);
+    REQUIRE(childA->text == a);
 
     // swap astAB and astA
     astAB.swap(astC);
