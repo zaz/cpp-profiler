@@ -3,7 +3,7 @@
 * Milestone 1 - 30 pts
 ** Implementation [6/6]
 - [X] Name the folder for this project ~profiler~.
-- [X] Read the code given in ~ASTree.hpp/cpp~, ~profile.hpp/cpp~, and ~main.cpp~.
+- [X] Read the code in ~ASTree.hpp/cpp~, ~profile.hpp/cpp~, and ~main.cpp~.
 - [X] The provided code works (compiles and runs) and the read/write are implemented.
 - [X] Implement AST methods: [4/4]
   - [X] TESTED WORKING destructor
@@ -13,6 +13,52 @@
   - [X] TESTED WORKING assignment operator
 - [X] Manually check the above using the function in ~main.cpp~.
 - [X] Use the provided makefile.
+
+* Milestone 2 - 30 pts
+** Implementation [1/5]
+- [X] Read the code in ~ASTree.hpp/cpp~.
+- [ ] Read and use the provided profile ADT ~profile.hpp/cpp~. This is a simple ADT that uses the STL map data type. It is a map of (~string X int~). With the string being the function name and/or line number. The integer is the count of times that line/function is executed.
+- [ ] To profile the program you will need to create a profile object for each file (as given on the command line) to keep track of statements and functions. These will be inserted as code into the main as global variable declarations. The main is the first file given in the input.
+- [ ] All profile objects need to be declared in the main and for each additional file you will need to ~#include "profile.hpp";~ and declare the file's profile object as external, for example ~extern foo_cpp;~
+  - The profiler only needs to work on cpp files. Do not instrument header files (~.h~, ~.hpp~).
+- [ ] Implement the functionality to insert profile declarations into the main file. This is needed for milestone 3. For example given the following main:
+  - Input:
+    #+BEGIN_SRC C++
+// main1.cpp
+#include <iostream>
+
+int main() {
+     int i;
+     i = 0;
+     while (i < 10) {
+         ++i;
+         std::cout << i;
+     }
+     return 0;
+}
+#+END_SRC
+  - Output:
+    #+BEGIN_SRC C++
+// p-main1.cpp
+#include <iostream>
+
+#include "profile.hpp"
+profile main1_cpp("main1.cpp");
+
+int main() {
+     int i;
+     i = 0;
+     while (i < 10) {
+         ++i;
+         std::cout << i;
+     }
+     return 0;
+}
+#+END_SRC
+** Testing:
+- [ ] Use simple.cpp (simple.cpp.xml) as a test case.
+- [ ] Make sure insertion of the code works properly (manually inspect).
+- [ ] The output (p-simple.cpp) should compile and run.
 
 * TODOs [0/2]
 - [ ] Test that AST::swap executes in constant time.
