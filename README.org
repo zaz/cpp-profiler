@@ -62,8 +62,6 @@ int main() {
 
 * TODOs [1/5]
 - [ ] Refactor "monolithic test", possibly by creating a function ~profile(std::vector<std::string> inputs)~.
-- [X] Modernize the file-handling code with ~std::filesystem::path~ instead of ~find~ and ~replace~, which didn't handle subdirectories properly;
-  - [X] then remove ~p-test/~.
-- [ ] Look into using ~std::filesystem~ instead of ~std::ifstream~
+- [X] Modernize the file-handling code with ~std::filesystem::path~ instead of ~find~ and ~replace~, which didn't handle subdirectories properly.
 - [ ] Test that ~AST::swap~ executes in constant time.
 - [ ] Add a pre-commit hook to run tests against the index.
