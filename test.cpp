@@ -128,6 +128,7 @@ TEST_CASE("test AST::getChild and copy assign") {
     REQUIRE(childAn == nullptr);
 
     std::unique_ptr<AST> childA;
+    // FIXME this empties astA because we are using a unique_ptr
     childA = astAB->getChild(a);
     REQUIRE(childA != nullptr);
     REQUIRE(childA->tag == a);
