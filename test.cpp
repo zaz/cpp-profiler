@@ -117,10 +117,12 @@ TEST_CASE("test copy assign AST") {
     auto astA = std::make_unique<AST>(token, a);
     auto astB = std::make_unique<AST>(token, b);
     auto astC = std::make_unique<AST>(token, c);
-    AST astAB = AST(category, "ayybees");
+
     // create astAB with two elements in child: astA and astB
+    AST astAB = AST(category, "ayybees");
     astAB.child.push_back(std::move(astA));
     astAB.child.push_back(std::move(astB));
+
     // swap astAB and astA
     astAB.swap(*astC);
 }
