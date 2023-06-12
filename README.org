@@ -21,7 +21,7 @@
 - [ ] To profile the program you will need to create a profile object for each file (as given on the command line) to keep track of statements and functions. These will be inserted as code into the main as global variable declarations. The main is the first file given in the input.
 - [ ] All profile objects need to be declared in the main and for each additional file you will need to ~#include "profile.hpp";~ and declare the file's profile object as external, for example ~extern foo_cpp;~
   - The profiler only needs to work on cpp files. Do not instrument header files (~.h~, ~.hpp~).
-- [X] Implement the functionality to insert profile declarations into the main file. This is needed for milestone 3. For example given the following main:
+- [X] TESTED WORKING Implement the functionality to insert profile declarations into the main file. This is needed for milestone 3. For example given the following main:
   - Input:
     #+BEGIN_SRC C++
 // main1.cpp
@@ -57,7 +57,7 @@ int main() {
 #+END_SRC
 ** Testing:
 - [ ] Use ~simple.cpp~ (~simple.cpp.xml~) as a test case.
-- [ ] Make sure insertion of the code works properly (manually inspect).
+- [X] Make sure insertion of the code works properly (manually inspect).
 - [ ] The output (~p-simple.cpp~) should compile and run.
 
 * TODOs [2/4]
