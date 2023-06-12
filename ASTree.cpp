@@ -95,7 +95,7 @@ void srcML::lineCount(const std::string& profileName) {
 
 
 //
-//AST::
+// AST::
 //
 
 // Constructs a category, token, or whitespace node for the tree.
