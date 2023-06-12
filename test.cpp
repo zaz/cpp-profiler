@@ -66,9 +66,7 @@ TEST_CASE("monolithic test") {
     code.functionCount(profileName[0]);       //Count funciton invocations
     code.lineCount(profileName[0]);           //Count line invocations
 
-    std::string outFileName;
-    outFileName = "p-" + inFileName[0];
-    std::ofstream outFile(outFileName.c_str());
+    std::ofstream outFile(outFileNames[0].c_str());
     outFile << code << std::endl;
     outFile.close();
 
@@ -81,8 +79,7 @@ TEST_CASE("monolithic test") {
         code.functionCount(profileName[i]);    //Count funciton invocations
         code.lineCount(profileName[i]);        //Count line invocations
 
-        outFileName = "p-" + inFileName[i];
-        outFile.open(outFileName.c_str());
+        outFile.open(outFileNames[i].c_str());
         outFile << code << std::endl;
         outFile.close();
     }
