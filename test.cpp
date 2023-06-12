@@ -125,4 +125,15 @@ TEST_CASE("test copy assign AST") {
 
     // swap astAB and astA
     astAB.swap(*astC);
+
+    // astAB should now be leaf "sea"
+    std::unique_ptr<AST> childAfromAB;
+    childAfromAB = astC->getChild(a);
+    REQUIRE(childAfromAB == nullptr);
+
+    // astC should now be "ayybees", containing astA and astB
+    std::unique_ptr<AST> childAfromC;
+    childAfromC = astC->getChild(a);
+    REQUIRE(childAfromC != nullptr);
+    REQUIRE(childAfromC->text == a);
 }
