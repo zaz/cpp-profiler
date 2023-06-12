@@ -56,10 +56,10 @@ int main() {
 }
 #+END_SRC
 ** Testing:
-- [ ] Use simple.cpp (simple.cpp.xml) as a test case.
+- [ ] Use ~simple.cpp~ (~simple.cpp.xml~) as a test case.
 - [ ] Make sure insertion of the code works properly (manually inspect).
-- [ ] The output (p-simple.cpp) should compile and run.
+- [ ] The output (~p-simple.cpp~) should compile and run.
 
 * TODOs [0/2]
-- [ ] Test that AST::swap executes in constant time.
+- [ ] Test that ~AST::swap~ executes in constant time.
 - [ ] Look into using ~std::filesystem~ instead of ~std::ifstream~
