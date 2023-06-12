@@ -171,6 +171,7 @@ std::unique_ptr<AST> AST::getChild(std::string tagName) {
             return std::move(c);
         }
     }
+    return nullptr;
 }
 
 
