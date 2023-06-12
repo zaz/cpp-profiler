@@ -53,7 +53,7 @@ std::shared_ptr<srcML> profileFiles(const std::vector<std::filesystem::path>& in
         throw std::runtime_error("Error: Could not open file "
                                  + outFilePaths[0].string());
     }
-    outFile << code << std::endl;
+    outFile << code;
     outFile.close();
 
     // Read rest of the files
@@ -75,7 +75,7 @@ std::shared_ptr<srcML> profileFiles(const std::vector<std::filesystem::path>& in
             throw std::runtime_error("Error: Could not open file "
                                     + outFilePaths[i].string());
         }
-        outFile << code << std::endl;
+        outFile << code;
         outFile.close();
     }
 
