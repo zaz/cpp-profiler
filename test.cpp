@@ -58,22 +58,24 @@ TEST_CASE("monolithic test") {
         outFilePaths.push_back(outFile);
     }
 
-    std::ifstream inFile(xmlFilePaths[0].c_str());    //Read in the main
+    // Read in the main
+    std::ifstream inFile(xmlFilePaths[0].c_str());
     // replace this with more modern std::filesystem based reading:
     inFile >> code;
     inFile.close();
 
-    code.mainHeader(profileNames, inFilePaths);   //Add in main header
-    code.mainReport(profileNames);             //Add in the report
-    code.functionCount(profileNames[0]);       //Count funciton invocations
-    code.lineCount(profileNames[0]);           //Count line invocations
+    code.mainHeader(profileNames, inFilePaths);  //Add in main header
+    code.mainReport(profileNames);               //Add in the report
+    code.functionCount(profileNames[0]);         //Count funciton invocations
+    code.lineCount(profileNames[0]);             //Count line invocations
 
     std::ofstream outFile(outFilePaths[0].c_str());
     outFile << code << std::endl;
     outFile.close();
 
-    for (unsigned i = 1; i < xmlFilePaths.size(); ++i) { //Read rest of the files
-        inFile.open(xmlFilePaths[i].c_str());
+    // Read rest of the files
+    for (unsigned i = 1; i < xmlFilePaths.size(); ++i) {
+        inFile.open(xmlFilePaths[i]);
         inFile >> code;
         inFile.close();
 
@@ -81,7 +83,7 @@ TEST_CASE("monolithic test") {
         code.functionCount(profileNames[i]);    //Count funciton invocations
         code.lineCount(profileNames[i]);        //Count line invocations
 
-        outFile.open(outFilePaths[i].c_str());
+        outFile.open(outFilePaths[i]);
         outFile << code << std::endl;
         outFile.close();
     }
