@@ -13,8 +13,7 @@
 #include "profileFiles.hpp"
 
 std::shared_ptr<srcML> profileFiles(const std::vector<std::filesystem::path>& inFilePaths) {
-    srcML                              codeL;  //Source code to be profiled.
-    auto code = std::make_shared<srcML>(codeL);
+    srcML                              code;  //Source code to be profiled.
     std::vector<std::filesystem::path> xmlFilePaths;
     std::vector<std::filesystem::path> outFilePaths;
     std::vector<std::string>           profileNames;
@@ -41,20 +40,20 @@ std::shared_ptr<srcML> profileFiles(const std::vector<std::filesystem::path>& in
         throw std::runtime_error("Error: Could not open file "
                                  + xmlFilePaths[0].string());
     }
-    inFile >> codeL;
+    inFile >> code;
     inFile.close();
 
-    code->mainHeader(profileNames, inFilePaths);  //Add in main header
-    code->mainReport(profileNames);               //Add in the report
-    code->functionCount(profileNames[0]);         //Count funciton invocations
-    code->lineCount(profileNames[0]);             //Count line invocations
+    code.mainHeader(profileNames, inFilePaths);  //Add in main header
+    code.mainReport(profileNames);               //Add in the report
+    code.functionCount(profileNames[0]);         //Count funciton invocations
+    code.lineCount(profileNames[0]);             //Count line invocations
 
     std::ofstream outFile(outFilePaths[0]);
     if (outFile.fail()) {
         throw std::runtime_error("Error: Could not open file "
                                  + outFilePaths[0].string());
     }
-    outFile << codeL << std::endl;
+    outFile << code << std::endl;
     outFile.close();
 
     // Read rest of the files
@@ -64,21 +63,21 @@ std::shared_ptr<srcML> profileFiles(const std::vector<std::filesystem::path>& in
             throw std::runtime_error("Error: Could not open file "
                                     + xmlFilePaths[i].string());
         }
-        inFile >> codeL;
+        inFile >> code;
         inFile.close();
 
-        code->fileHeader(profileNames[i]);       //Add in file header info
-        code->functionCount(profileNames[i]);    //Count funciton invocations
-        code->lineCount(profileNames[i]);        //Count line invocations
+        code.fileHeader(profileNames[i]);       //Add in file header info
+        code.functionCount(profileNames[i]);    //Count funciton invocations
+        code.lineCount(profileNames[i]);        //Count line invocations
 
         outFile.open(outFilePaths[i]);
         if (outFile.fail()) {
             throw std::runtime_error("Error: Could not open file "
                                     + outFilePaths[i].string());
         }
-        outFile << *code << std::endl;
+        outFile << code << std::endl;
         outFile.close();
     }
 
-    return code;
+    return std::make_shared<srcML>(code);
 }
