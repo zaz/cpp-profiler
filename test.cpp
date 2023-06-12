@@ -153,6 +153,13 @@ TEST_CASE("AST") {
 
     SECTION("AST::=") {
         std::shared_ptr<AST> astCopy = astAB;
+
+        // check original is unaltered
+        std::shared_ptr<AST> child = astAB->getChild(a);
+        REQUIRE(child != nullptr);
+        REQUIRE(child->tag == a);
+
+        // check the copy is the same as the original
         std::shared_ptr<AST> copyChild = astCopy->getChild(a);
         REQUIRE(copyChild != nullptr);
         REQUIRE(copyChild->tag == a);
