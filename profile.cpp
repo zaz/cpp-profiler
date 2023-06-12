@@ -22,7 +22,6 @@ std::ostream& operator<< (std::ostream& out, const profile& p) {
 }
 
 
-
 // REQUIRES:  n >= 0
 // ENSURES: Returns a text version of a positive integer long
 //

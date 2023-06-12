@@ -233,16 +233,30 @@ void AST::mainHeader(const std::vector<std::string>& profileName,
 }
 
 
-//  Adds in each file (except main file):
-//  1. #include "profile.hpp"
-//  2. All needed external profile object declarations
-//      example: extern profile thisfile_cpp;
+// Adds in each file (except main file):
+// 1. #include "profile.hpp"
+// 2. All needed external profile object declarations
+//     example: extern profile thisfile_cpp;
+// TODO: factor out for loop
 //
 void AST::fileHeader(const std::string& profileName) {
-    //TODO: IMPLEMENT
-    //Skip down a couple lines or find first function and put it before it
-    //Add #include "profile.hpp"
-    //Add in the external declaration for that file "extern profile foo_cpp;"
+
+    // not technically correct srcML, but it produces the correct text
+    auto profiler = std::make_shared<AST>(category, "profiler");
+    auto include = std::make_shared<AST>(token, "#include \"profile.hpp\"\n");
+    profiler->child.push_back(include);
+    auto extrn = std::make_shared<AST>(token,
+                                       "extern profile " + profileName + ";\n");
+    profiler->child.push_back(extrn);
+
+    auto pos = this->child.begin();
+    for (auto& c : child) {
+        if (c->tag == "function" && c->findName() == "main") {
+            this->child.insert(pos, profiler);
+            break;
+        }
+        ++pos;
+    }
 }
 
 
