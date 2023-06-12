@@ -37,7 +37,8 @@ void testCopyAssign(srcML p, std::string codeText) {
 }
 
 TEST_CASE("monolithic test") {
-    auto inFilePaths = std::vector<std::filesystem::path>({"tests/test.cpp"});
+    std::vector<std::filesystem::path> inFilePaths;
+    inFilePaths.push_back(std::filesystem::path("tests/test.cpp"));
     std::cout << inFilePaths[0] << std::endl;
     std::shared_ptr<srcML> code = profileFiles(inFilePaths);
 
