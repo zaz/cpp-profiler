@@ -99,5 +99,9 @@ clean:
 	rm -f p-*
 
 check:
+	make test
+	valgrind --leak-check=full --error-exitcode=1 --quiet \
+	         --show-possibly-lost=no ./test
+	make profiler
 	valgrind --leak-check=full --error-exitcode=1 --quiet \
 	         --show-possibly-lost=no ./profiler simple.cpp.xml >/dev/null
