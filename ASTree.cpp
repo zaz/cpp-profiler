@@ -212,11 +212,21 @@ std::string AST::findName() const {
 void AST::mainHeader(const std::vector<std::string>& profileName,
                      const std::vector<std::filesystem::path>& filePath) {
 
-    //TODO: IMPLEMENT
-    //Skip down a couple lines or find main and put it before it
-    //Add a node with #include "profile.hpp"
-    //For each file profile name, add a node with a profile
+    // not technically correct srcML, but it produces the correct text
+    auto include = std::shared_ptr<AST>(
+                        new AST(token, "#include \"profile.hpp\"\n"));
+    // TODO: For each file profile name, add a node with a profile
     //   declaration "profile foo_cpp("foo.cpp");"
+
+    unsigned i = 0;
+    auto pos = this->child.begin();
+    for (auto& c : child) {
+        if (c->tag == "function" && c->findName() == "main") {
+            this->child.insert(pos, include);
+            break;
+        }
+        ++pos;
+    }
 }
 
 
