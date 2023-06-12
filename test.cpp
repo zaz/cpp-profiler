@@ -114,21 +114,20 @@ TEST_CASE("test AST::getChild and copy assign") {
     std::string b = "bee";
     std::string c = "sea";
 
-    auto astA = std::make_unique<AST>(category, a);
-    auto astB = std::make_unique<AST>(category, b);
-    auto astC = std::make_unique<AST>(category, c);
+    auto astA = std::make_shared<AST>(category, a);
+    auto astB = std::make_shared<AST>(category, b);
+    auto astC = std::make_shared<AST>(category, c);
 
     // create astAB with two elements in child: astA and astB
-    auto astAB = std::make_unique<AST>(category, "ayybees");
+    auto astAB = std::make_shared<AST>(category, "ayybees");
     astAB->child.push_back(std::move(astA));
     astAB->child.push_back(std::move(astB));
 
-    std::unique_ptr<AST> childAn;
+    std::shared_ptr<AST> childAn;
     childAn = astC->getChild(a);
     REQUIRE(childAn == nullptr);
 
-    std::unique_ptr<AST> childA;
-    // FIXME this empties astA because we are using a unique_ptr
+    std::shared_ptr<AST> childA;
     childA = astAB->getChild(a);
     REQUIRE(childA != nullptr);
     REQUIRE(childA->tag == a);
@@ -137,12 +136,12 @@ TEST_CASE("test AST::getChild and copy assign") {
     std::swap(astAB, astC);
 
     // astAB should now be leaf "sea"
-    std::unique_ptr<AST> childAfromAB;
+    std::shared_ptr<AST> childAfromAB;
     childAfromAB = astAB->getChild(a);
     REQUIRE(childAfromAB == nullptr);
 
     // astC should now be "ayybees", containing astA and astB
-    std::unique_ptr<AST> childAfromC;
+    std::shared_ptr<AST> childAfromC;
     childAfromC = astC->getChild(a);
     REQUIRE(childAfromC != nullptr);
     REQUIRE(childAfromC->tag == a);

@@ -44,9 +44,9 @@ void testCopyAssignAST() {
     std::string b = "bee";
     std::string c = "sea";
 
-    auto astA = std::make_unique<AST>(token, a);
-    auto astB = std::make_unique<AST>(token, b);
-    auto astC = std::make_unique<AST>(token, c);
+    auto astA = std::make_shared<AST>(token, a);
+    auto astB = std::make_shared<AST>(token, b);
+    auto astC = std::make_shared<AST>(token, c);
 
     // create astAB with two elements in child: astA and astB
     AST astAB = AST(category, "ayybees");

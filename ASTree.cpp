@@ -120,7 +120,7 @@ AST::AST(nodes t, const std::string& s) {
 //
 AST::~AST() {
     child.clear();
-    // unique_ptr recursively deletes all children
+    // shared_ptr recursively deletes all children
 }
 
 
@@ -133,8 +133,8 @@ AST::AST(const AST& actual) {
     this->closeTag = actual.closeTag;
     this->text = actual.text;
     for (auto const& c : actual.child) {
-        std::unique_ptr<AST> temp(new AST(*c));
-        this->child.push_back(std::move(temp));
+        std::shared_ptr<AST> temp(new AST(*c));
+        this->child.push_back(temp);
     }
 }
 
@@ -165,10 +165,10 @@ AST& AST::operator=(AST rhs) {
 //
 // IMPORTANT for milestone 2 and 3
 //
-std::unique_ptr<AST> AST::getChild(std::string tagName) {
+std::shared_ptr<AST> AST::getChild(std::string tagName) {
     for (auto& c : child) {
         if (c->tag == tagName) {
-            return std::move(c);
+            return c;
         }
     }
     return nullptr;
@@ -297,7 +297,7 @@ bool isStopTag(std::string tag) {
 // Preorder traversal that prints out leaf nodes only (tokens & whitesapce)
 //
 std::ostream& AST::print(std::ostream& out) const {
-    for (std::list<std::unique_ptr<AST>>::const_iterator i = child.begin(); i != child.end(); ++i) {
+    for (std::list<std::shared_ptr<AST>>::const_iterator i = child.begin(); i != child.end(); ++i) {
         if ((*i)->nodeType != category)
             out << (*i)->text;   //Token or whitespace node, print it
         else
@@ -312,7 +312,7 @@ std::ostream& AST::print(std::ostream& out) const {
 //           && this == new AST(category, "TagName")
 //
 std::istream& AST::read(std::istream& in) {
-    std::unique_ptr<AST> subtree;
+    std::shared_ptr<AST> subtree;
     std::string temp, Lws, Rws;
     char ch;
     if (!in.eof()) in.get(ch);
@@ -326,7 +326,7 @@ std::istream& AST::read(std::istream& in) {
             subtree.reset(new AST(category, temp));                  //Create a new node
             subtree->read(in);                               //Read it in
             in.get(ch);
-            child.push_back(std::move(subtree));                        //Add it to child
+            child.push_back(subtree);                        //Add it to child
         } else {                                             //Found a token
             temp = std::string(1, ch) + readUntil(in, '<');  //Read it in.
             std::vector<std::string> tokenList = tokenize(temp);
@@ -338,7 +338,7 @@ std::istream& AST::read(std::istream& in) {
                 } else {
                     subtree.reset(new AST(token, *i));
                 }
-                child.push_back(std::move(subtree));
+                child.push_back(subtree);
             }
             ch = '<';
         }

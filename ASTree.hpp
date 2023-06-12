@@ -57,7 +57,7 @@ public:
     void                 swap          (AST&);
     AST&                 operator=     (AST);
 
-    std::unique_ptr<AST> getChild      (std::string);
+    std::shared_ptr<AST> getChild      (std::string);
     std::string          getName       () const;
     void                 mainHeader    (const std::vector<std::string>&,
                                         const std::vector<std::string>&);
@@ -72,7 +72,7 @@ public:
     nodes                           nodeType;   //Category, Token, or Whitespace
     std::string                     tag,        //Category: the tag name and
                                     closeTag;   //          closing tag.
-    std::list<std::unique_ptr<AST>> child;      //Category: A list of subtrees.
+    std::list<std::shared_ptr<AST>> child;      //Category: A list of subtrees.
     std::string                     text;       //Token/Whitespace: the text.
 };
 
