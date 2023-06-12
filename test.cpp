@@ -114,9 +114,9 @@ TEST_CASE("test AST::getChild and copy assign") {
     std::string b = "bee";
     std::string c = "sea";
 
-    auto astA = std::make_unique<AST>(token, a);
-    auto astB = std::make_unique<AST>(token, b);
-    auto astC = std::make_unique<AST>(token, c);
+    auto astA = std::make_unique<AST>(category, a);
+    auto astB = std::make_unique<AST>(category, b);
+    auto astC = std::make_unique<AST>(category, c);
 
     // create astAB with two elements in child: astA and astB
     auto astAB = std::make_unique<AST>(category, "ayybees");
@@ -130,19 +130,19 @@ TEST_CASE("test AST::getChild and copy assign") {
     std::unique_ptr<AST> childA;
     childA = astAB->getChild(a);
     REQUIRE(childA != nullptr);
-    REQUIRE(childA->text == a);
+    REQUIRE(childA->tag == a);
 
-    // swap astAB and astA
-    astAB.swap(astC);
+    // swap astAB and astC
+    std::swap(astAB, astC);
 
     // astAB should now be leaf "sea"
     std::unique_ptr<AST> childAfromAB;
-    childAfromAB = astC->getChild(a);
+    childAfromAB = astAB->getChild(a);
     REQUIRE(childAfromAB == nullptr);
 
     // astC should now be "ayybees", containing astA and astB
     std::unique_ptr<AST> childAfromC;
     childAfromC = astC->getChild(a);
     REQUIRE(childAfromC != nullptr);
-    REQUIRE(childAfromC->text == a);
+    REQUIRE(childAfromC->tag == a);
 }
