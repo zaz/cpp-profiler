@@ -60,10 +60,10 @@ int main() {
 - [ ] Make sure insertion of the code works properly (manually inspect).
 - [ ] The output (~p-simple.cpp~) should compile and run.
 
-* TODOs [0/5]
+* TODOs [1/5]
 - [ ] Refactor "monolithic test", possibly by creating a function ~profile(std::vector<std::string> inputs)~.
-- [ ] Modernize the file-handling code. Currently we are using strings and ~find~ and ~replace~, which doesn't handle subdirectories properly;
-  - [ ] then remove ~p-test/~.
+- [X] Modernize the file-handling code with ~std::filesystem::path~ instead of ~find~ and ~replace~, which didn't handle subdirectories properly;
+  - [X] then remove ~p-test/~.
 - [ ] Look into using ~std::filesystem~ instead of ~std::ifstream~
 - [ ] Test that ~AST::swap~ executes in constant time.
 - [ ] Add a pre-commit hook to run tests against the index.
