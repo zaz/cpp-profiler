@@ -141,7 +141,7 @@ TEST_CASE("AST") {
 
     SECTION("AST::swap") {
         // swap astAB and astC
-        std::swap(astAB, astC);
+        astAB->swap(*astC);
 
         // astAB should now be leaf "sea"
         std::shared_ptr<AST> childAfromAB;
