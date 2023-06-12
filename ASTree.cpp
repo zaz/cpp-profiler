@@ -213,16 +213,19 @@ void AST::mainHeader(const std::vector<std::string>& profileName,
                      const std::vector<std::filesystem::path>& filePath) {
 
     // not technically correct srcML, but it produces the correct text
+    auto profiler = std::make_shared<AST>(category, "profiler");
     auto include = std::make_shared<AST>(token, "#include \"profile.hpp\"\n");
+    profiler->child.push_back(include);
+    for (unsigned i = 0; i < profileName.size(); ++i) {
+        auto profile = std::make_shared<AST>(token,
+            "profile " + profileName[i] + "(\"" + filePath[i].string() + "\");\n" );
+        profiler->child.push_back(profile);
+    }
 
-    // TODO: For each file profile name, add a node with a profile
-    //   declaration "profile foo_cpp("foo.cpp");"
-
-    unsigned i = 0;
     auto pos = this->child.begin();
     for (auto& c : child) {
         if (c->tag == "function" && c->findName() == "main") {
-            this->child.insert(pos, include);
+            this->child.insert(pos, profiler);
             break;
         }
         ++pos;
