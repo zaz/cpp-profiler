@@ -184,6 +184,9 @@ std::shared_ptr<AST> AST::getChild(std::string tagName) {
 // IMPORTANT for milestone 3
 //
 std::string AST::getName() const {
+    if (this->tag != "name") {
+        throw std::invalid_argument("AST::getName() called on non-name node");
+    }
     std::string result;
     if (child.front()->tag != "name") {
         result = child.front()->text;   //A simple name (e.g., main)
