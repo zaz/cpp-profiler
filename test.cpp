@@ -119,12 +119,12 @@ TEST_CASE("test copy assign AST") {
     auto astC = std::make_unique<AST>(token, c);
 
     // create astAB with two elements in child: astA and astB
-    AST astAB = AST(category, "ayybees");
-    astAB.child.push_back(std::move(astA));
-    astAB.child.push_back(std::move(astB));
+    auto astAB = std::make_unique<AST>(category, "ayybees");
+    astAB->child.push_back(std::move(astA));
+    astAB->child.push_back(std::move(astB));
 
     // swap astAB and astA
-    astAB.swap(*astC);
+    astAB.swap(astC);
 
     // astAB should now be leaf "sea"
     std::unique_ptr<AST> childAfromAB;
