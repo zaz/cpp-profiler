@@ -2,12 +2,9 @@
 //  test.cpp
 //  Profiler
 //
-//  Created by Jonathan Maletic.
-//  Copyright 2023 Kent State University. All rights reserved.
+//  Created by Zaz Brown
 //  Spring 2023
 //  srcML 1.0
-//
-//  Modified by: Zaz Brown
 //
 
 #define CATCH_CONFIG_MAIN
