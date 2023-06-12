@@ -204,6 +204,17 @@ std::string AST::findName() const {
     return this->getChild("name")->getName();
 }
 
+std::shared_ptr<AST> AST::findTag(const std::string& tagName) const {
+    auto pos = this->child.begin();
+    for (auto& c : child) {
+        if (c->tag == tagName) {
+            return(c);
+            //this->child.insert(pos, profiler);
+        }
+        ++pos;
+    }
+}
+
 std::shared_ptr<AST> AST::findTagWithName(const std::string& tagName,
                                           const std::string& name) const {
     auto pos = this->child.begin();
@@ -278,6 +289,7 @@ void AST::fileHeader(const std::string& profileName) {
 void AST::mainReport(const std::vector<std::string>& profileName) {
     //TODO: IMPLEMENT
     //Find the function with name of "main" in the file
+    AST main = *findTagWithName("function", "main");
     // -Get the "block" node of this function
     // -Set an iterator to the child.end() of "block"
     // -Decrement it once (to skip the "}")
