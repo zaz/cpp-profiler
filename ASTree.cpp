@@ -165,7 +165,7 @@ AST& AST::operator=(AST rhs) {
 //
 // IMPORTANT for milestone 2 and 3
 //
-std::shared_ptr<AST> AST::getChild(std::string tagName) {
+std::shared_ptr<AST> AST::getChild(std::string tagName) const {
     for (auto& c : child) {
         if (c->tag == tagName) {
             return c;
@@ -198,6 +198,11 @@ std::string AST::getName() const {
     return result;
 }
 
+// finds the contents of the name tag inside this
+// does not recurse
+std::string AST::findName() const {
+    return this->getChild("name")->getName();
+}
 
 //  Adds above the main, in the main file:
 //  1. #include "profile.hpp"

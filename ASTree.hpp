@@ -58,8 +58,8 @@ public:
     void                 swap          (AST&);
     AST&                 operator=     (AST);
 
-    std::shared_ptr<AST> getChild      (std::string);
-    std::string          getName       () const;
+    std::shared_ptr<AST> getChild      (std::string) const;
+    std::string          findName      () const;
     void                 mainHeader    (const std::vector<std::string>&,
                                         const std::vector<std::filesystem::path>&);
     void                 fileHeader    (const std::string&);
@@ -70,6 +70,7 @@ public:
     std::istream&        read          (std::istream&);
 
 // private:
+    std::string          getName       () const;
     nodes                           nodeType;   //Category, Token, or Whitespace
     std::string                     tag,        //Category: the tag name and
                                     closeTag;   //          closing tag.
