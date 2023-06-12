@@ -1,0 +1,19 @@
+#+title: CS23001 Project 4
+
+* Milestone 1 - 30 pts
+** Implementation [5/6]
+- [X] Name the folder for this project ~profiler~.
+- [X] Read the code given in ~ASTree.hpp/cpp~, ~profile.hpp/cpp~, and ~main.cpp~.
+- [X] The provided code works (compiles and runs) and the read/write are implemented.
+- [X] Implement AST methods: [4/4]
+  - [X] TESTED WORKING destructor
+    - I used shared pointers and tested for memory leaks with valgrind.
+  - [X] TESTED WORKING copy constructor
+  - [X] TESTED WORKING constant time swap
+  - [X] TESTED WORKING assignment operator
+- [ ] Manually check the above using the function in ~main.cpp~.
+- [X] Use the provided makefile.
+
+* TODOs [0/2]
+- [ ] Test that AST::swap executes in constant time.
+- [ ] Look into using ~std::filesystem~ instead of ~std::ifstream~
