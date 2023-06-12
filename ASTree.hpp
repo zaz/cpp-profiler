@@ -59,6 +59,7 @@ public:
     AST&                 operator=     (AST);
 
     std::shared_ptr<AST> getChild      (std::string) const;
+    std::shared_ptr<AST> findTagWithName (const std::string&, const std::string&) const;
     std::string          findName      () const;
     void                 mainHeader    (const std::vector<std::string>&,
                                         const std::vector<std::filesystem::path>&);

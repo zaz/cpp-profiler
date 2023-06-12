@@ -204,6 +204,18 @@ std::string AST::findName() const {
     return this->getChild("name")->getName();
 }
 
+std::shared_ptr<AST> AST::findTagWithName(const std::string& tagName,
+                                          const std::string& name) const {
+    auto pos = this->child.begin();
+    for (auto& c : child) {
+        if (c->tag == "function" && c->findName() == "main") {
+            return(c);
+            //this->child.insert(pos, profiler);
+        }
+        ++pos;
+    }
+}
+
 //  Adds above the main, in the main file:
 //  1. #include "profile.hpp"
 //  2. All needed profile object declarations
