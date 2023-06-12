@@ -152,7 +152,7 @@ void AST::swap(AST& rhs) {
     swap(child, rhs.child);
 }
 
-/// Assignment for AST
+// Assignment for AST
 //
 AST& AST::operator=(AST rhs) {
     swap(rhs);
