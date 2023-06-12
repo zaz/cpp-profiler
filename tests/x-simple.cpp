@@ -1,8 +1,5 @@
 #include <iostream>
 
-#include "profile.hpp"
-profile simple_cpp("simple.cpp");
-
 int search(int tbl[], int n, int key) {
     int result = -1;
     for (int i = 0; i < n; ++i) {
@@ -13,6 +10,8 @@ int search(int tbl[], int n, int key) {
     return result;
 }
 
+#include "profile.hpp"
+profile tests_simple_cpp("tests/simple.cpp");
 int main() {
     int lst[5] = {2, 4, 6, 8, 10};
     std::cout << search(lst, 5, 6);
