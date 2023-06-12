@@ -36,7 +36,7 @@ void testCopyAssign(srcML p, std::string codeText) {
 
 TEST_CASE("monolithic test") {
     srcML                     code;       //Source code to be profiled.
-    std::vector<std::string>  inputName = {"simple.cpp.xml"};
+    std::vector<std::string>  inputName = {"tests/simple.cpp.xml"};
     std::vector<std::string>  fileName;
     std::vector<std::string>  profileName;
 
