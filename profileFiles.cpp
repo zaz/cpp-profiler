@@ -25,7 +25,8 @@ std::shared_ptr<srcML> profileFiles(const std::vector<std::filesystem::path>& in
 
         std::string name = path;
         std::replace(name.begin(), name.end(), '.', '_');
-        // TODO: determine if we also need to replace "/"
+        // TODO: make sure this is how we want to handle "/"
+        std::replace(name.begin(), name.end(), '/', '_');
         profileNames.push_back(name);
 
         auto outFile = path.parent_path();
