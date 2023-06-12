@@ -37,11 +37,11 @@ void testCopyAssign(srcML p, std::string codeText) {
 
 TEST_CASE("monolithic test") {
     srcML                    code;      //Source code to be profiled.
-    std::vector<std::string> fileName = {"tests/simple.cpp"};
+    std::vector<std::string> inFileName = {"tests/simple.cpp"};
     std::vector<std::string> inputName;
     std::vector<std::string> profileName;
 
-    for (auto const& file : fileName) {
+    for (auto const& file : inFileName) {
         // parse input as file path
         std::filesystem::path inputPath(file);
         std::string temp = file + ".xml";  //Add .xml
@@ -56,13 +56,13 @@ TEST_CASE("monolithic test") {
     inFile >> code;
     inFile.close();
 
-    code.mainHeader(profileName, fileName);   //Add in main header
+    code.mainHeader(profileName, inFileName);   //Add in main header
     code.mainReport(profileName);             //Add in the report
     code.functionCount(profileName[0]);       //Count funciton invocations
     code.lineCount(profileName[0]);           //Count line invocations
 
     std::string outFileName;
-    outFileName = "p-" + fileName[0];
+    outFileName = "p-" + inFileName[0];
     std::ofstream outFile(outFileName.c_str());
     outFile << code << std::endl;
     outFile.close();
@@ -76,7 +76,7 @@ TEST_CASE("monolithic test") {
         code.functionCount(profileName[i]);    //Count funciton invocations
         code.lineCount(profileName[i]);        //Count line invocations
 
-        outFileName = "p-" + fileName[i];
+        outFileName = "p-" + inFileName[i];
         outFile.open(outFileName.c_str());
         outFile << code << std::endl;
         outFile.close();
