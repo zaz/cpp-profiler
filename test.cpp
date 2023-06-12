@@ -13,8 +13,8 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include <iostream>
 #include <filesystem>
+#include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -36,50 +36,52 @@ void testCopyAssign(srcML p, std::string codeText) {
 }
 
 TEST_CASE("monolithic test") {
-    srcML                    code;        //Source code to be profiled.
-    std::vector<std::string> inFileName = {"tests/simple.cpp"};
-    std::vector<std::string> inputName;
-    std::vector<std::string> profileName;
-    std::vector<std::string> outFileNames;
+    srcML                              code;  //Source code to be profiled.
+    std::vector<std::filesystem::path> inFilePaths = {"tests/simple.cpp"};
+    std::vector<std::filesystem::path> xmlFilePaths;
+    std::vector<std::filesystem::path> outFilePaths;
+    std::vector<std::string>           profileNames;
 
-    for (auto const& file : inFileName) {
-        // parse input as file path
-        auto inFilePath = std::filesystem::path(file);
-        std::string temp = file + ".xml";  //Add .xml
-        inputName.push_back(temp);                         //Put in list
-        std::string name = file;
-        std::replace(name.begin(), name.end(), '.', '_');  //convert . to _
+    for (auto const& path : inFilePaths) {
+        std::filesystem::path xmlFilePath = path;
+        xmlFilePath += ".xml";
+        xmlFilePaths.push_back(xmlFilePath);
+
+        std::string name = path;
+        std::replace(name.begin(), name.end(), '.', '_');
         // TODO: determine if we also need to replace "/"
-        profileName.push_back(name);                       //Put in list
-        auto outFile = inFilePath.parent_path();
+        profileNames.push_back(name);
+
+        auto outFile = path.parent_path();
         outFile /= "p-";
-        outFile += inFilePath.filename();
-        outFileNames.push_back(outFile);
+        outFile += path.filename();
+        outFilePaths.push_back(outFile);
     }
 
-    std::ifstream inFile(inputName[0].c_str());    //Read in the main
+    std::ifstream inFile(xmlFilePaths[0].c_str());    //Read in the main
+    // replace this with more modern std::filesystem based reading:
     inFile >> code;
     inFile.close();
 
-    code.mainHeader(profileName, inFileName);   //Add in main header
-    code.mainReport(profileName);             //Add in the report
-    code.functionCount(profileName[0]);       //Count funciton invocations
-    code.lineCount(profileName[0]);           //Count line invocations
+    code.mainHeader(profileNames, inFilePaths);   //Add in main header
+    code.mainReport(profileNames);             //Add in the report
+    code.functionCount(profileNames[0]);       //Count funciton invocations
+    code.lineCount(profileNames[0]);           //Count line invocations
 
-    std::ofstream outFile(outFileNames[0].c_str());
+    std::ofstream outFile(outFilePaths[0].c_str());
     outFile << code << std::endl;
     outFile.close();
 
-    for (unsigned i = 1; i < inputName.size(); ++i) { //Read rest of the files
-        inFile.open(inputName[i].c_str());
+    for (unsigned i = 1; i < xmlFilePaths.size(); ++i) { //Read rest of the files
+        inFile.open(xmlFilePaths[i].c_str());
         inFile >> code;
         inFile.close();
 
-        code.fileHeader(profileName[i]);       //Add in file header info
-        code.functionCount(profileName[i]);    //Count funciton invocations
-        code.lineCount(profileName[i]);        //Count line invocations
+        code.fileHeader(profileNames[i]);       //Add in file header info
+        code.functionCount(profileNames[i]);    //Count funciton invocations
+        code.lineCount(profileNames[i]);        //Count line invocations
 
-        outFile.open(outFileNames[i].c_str());
+        outFile.open(outFilePaths[i].c_str());
         outFile << code << std::endl;
         outFile.close();
     }

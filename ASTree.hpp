@@ -13,6 +13,7 @@
 #ifndef INCLUDES_ASTree_H_
 #define INCLUDES_ASTree_H_
 
+#include <filesystem>
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -60,7 +61,7 @@ public:
     std::shared_ptr<AST> getChild      (std::string);
     std::string          getName       () const;
     void                 mainHeader    (const std::vector<std::string>&,
-                                        const std::vector<std::string>&);
+                                        const std::vector<std::filesystem::path>&);
     void                 fileHeader    (const std::string&);
     void                 mainReport    (const std::vector<std::string>&);
     void                 functionCount (const std::string&);
@@ -88,7 +89,7 @@ public:
     void    swap          (srcML&);
     srcML&  operator=     (srcML);
     void    mainHeader    (const std::vector<std::string>&,
-                           const std::vector<std::string>&);
+                           const std::vector<std::filesystem::path>&);
     void    fileHeader    (const std::string&);
     void    mainReport    (const std::vector<std::string>&);
     void    functionCount (const std::string&);

@@ -65,8 +65,8 @@ std::ostream& operator<<(std::ostream& out, const srcML& src){
 //  Adds in the includes and profile object declarations
 //
 void srcML::mainHeader(const std::vector<std::string>& profileName,
-                       const std::vector<std::string>& fileName    ) {
-    tree->mainHeader(profileName, fileName);
+                       const std::vector<std::filesystem::path>& filePath    ) {
+    tree->mainHeader(profileName, filePath);
 }
 
 //  Adds in the includes and declares profile object declarations
@@ -202,7 +202,7 @@ std::string AST::getName() const {
 //      example: profile foo_cpp("foo.cpp");
 //
 void AST::mainHeader(const std::vector<std::string>& profileName,
-                     const std::vector<std::string>& fileName     ) {
+                     const std::vector<std::filesystem::path>& filePath) {
 
     //TODO: IMPLEMENT
     //Skip down a couple lines or find main and put it before it
