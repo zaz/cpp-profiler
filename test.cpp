@@ -46,6 +46,28 @@ TEST_CASE("profile simple.cpp") {
         codeText << code;
         testCopyAssign(code, codeText.str());
     }
+
+    SECTION("p-simple.cpp matches x-simple.cpp") {
+        std::ifstream pFile("tests/p-simple.cpp");
+        if (pFile.fail()) {
+            throw std::runtime_error(
+                "Error: Could not open file tests/p-simple.cpp" );
+        }
+        std::stringstream pText;
+        pText << pFile.rdbuf();
+        pFile.close();
+
+        std::ifstream xFile("tests/x-simple.cpp");
+        if (xFile.fail()) {
+            throw std::runtime_error(
+                "Error: Could not open file tests/x-simple.cpp" );
+        }
+        std::stringstream xText;
+        xText << xFile.rdbuf();
+        xFile.close();
+
+        REQUIRE(pText.str() == xText.str());
+    }
 }
 
 TEST_CASE("test parsing of foo and srcML::swap") {
