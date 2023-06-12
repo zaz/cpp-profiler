@@ -154,4 +154,12 @@ TEST_CASE("AST") {
         REQUIRE(childAfromC != nullptr);
         REQUIRE(childAfromC->tag == a);
     }
+
+    SECTION("AST::=") {
+        std::shared_ptr<AST> astCopy = astAB;
+        std::shared_ptr<AST> copyChild;
+        copyChild = astCopy->getChild(a);
+        REQUIRE(copyChild != nullptr);
+        REQUIRE(copyChild->tag == a);
+    }
 }
