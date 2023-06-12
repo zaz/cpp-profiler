@@ -213,8 +213,8 @@ void AST::mainHeader(const std::vector<std::string>& profileName,
                      const std::vector<std::filesystem::path>& filePath) {
 
     // not technically correct srcML, but it produces the correct text
-    auto include = std::shared_ptr<AST>(
-                        new AST(token, "#include \"profile.hpp\"\n"));
+    auto include = std::make_shared<AST>(token, "#include \"profile.hpp\"\n");
+
     // TODO: For each file profile name, add a node with a profile
     //   declaration "profile foo_cpp("foo.cpp");"
 
