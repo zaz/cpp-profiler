@@ -14,6 +14,7 @@
 #include "catch.hpp"
 
 #include <iostream>
+#include <filesystem>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -35,16 +36,20 @@ void testCopyAssign(srcML p, std::string codeText) {
 }
 
 TEST_CASE("monolithic test") {
-    srcML                     code;       //Source code to be profiled.
-    std::vector<std::string>  inputName = {"tests/simple.cpp.xml"};
-    std::vector<std::string>  fileName;
-    std::vector<std::string>  profileName;
+    srcML                    code;      //Source code to be profiled.
+    std::vector<std::string> fileName = {"tests/simple.cpp"};
+    std::vector<std::string> inputName;
+    std::vector<std::string> profileName;
 
-    for (auto const& input : inputName) {
-        std::string temp = input.substr(0, input.find(".xml"));  //Remove .xml
-        fileName.push_back(temp);                                //Put in list
-        std::replace(temp.begin(), temp.end(), '.', '_');        //convert . to _
-        profileName.push_back(temp);                             //Put in list
+    for (auto const& file : fileName) {
+        // parse input as file path
+        std::filesystem::path inputPath(file);
+        std::string temp = file + ".xml";  //Add .xml
+        inputName.push_back(temp);                         //Put in list
+        std::string name = file;
+        std::replace(name.begin(), name.end(), '.', '_');  //convert . to _
+        // TODO: determine if we also need to replace "/"
+        profileName.push_back(name);                       //Put in list
     }
 
     std::ifstream inFile(inputName[0].c_str());    //Read in the main
