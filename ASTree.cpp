@@ -208,7 +208,7 @@ std::shared_ptr<AST> AST::findTagWithName(const std::string& tagName,
                                           const std::string& name) const {
     auto pos = this->child.begin();
     for (auto& c : child) {
-        if (c->tag == "function" && c->findName() == "main") {
+        if (c->tag == tagName && c->findName() == name) {
             return(c);
             //this->child.insert(pos, profiler);
         }
