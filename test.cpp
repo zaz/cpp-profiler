@@ -40,12 +40,12 @@ TEST_CASE("monolithic test") {
     std::vector<std::filesystem::path> inFilePaths;
     inFilePaths.push_back(std::filesystem::path("tests/simple.cpp"));
     std::cout << inFilePaths[0] << std::endl;
-    std::shared_ptr<srcML> code = profileFiles(inFilePaths);
+    srcML code = *profileFiles(inFilePaths);
 
     SECTION("srcML copy assign") {
         std::stringstream codeText;
         codeText << code;
-        testCopyAssign(*code, codeText.str());
+        testCopyAssign(code, codeText.str());
     }
 }
 
