@@ -26,6 +26,6 @@
 
 #include "ASTree.hpp"
 
-std::shared_ptr<srcML> profileFiles(const std::vector<std::filesystem::path> inFilePaths);
+std::shared_ptr<srcML> profileFiles(const std::vector<std::filesystem::path>&);
 
 #endif
