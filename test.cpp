@@ -36,10 +36,9 @@ void testCopyAssign(srcML p, std::string codeText) {
     REQUIRE(emptyCodeStream.str() == "");
 }
 
-TEST_CASE("monolithic test") {
+TEST_CASE("profile simple.cpp") {
     std::vector<std::filesystem::path> inFilePaths;
     inFilePaths.push_back(std::filesystem::path("tests/simple.cpp"));
-    std::cout << inFilePaths[0] << std::endl;
     srcML code = *profileFiles(inFilePaths);
 
     SECTION("srcML copy assign") {
