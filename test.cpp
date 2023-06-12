@@ -77,9 +77,11 @@ TEST_CASE("monolithic test") {
         outFile.close();
     }
 
-    std::stringstream codeText;
-    codeText << code;
-    testCopyAssign(code, codeText.str());
+    SECTION("srcML copy assign") {
+        std::stringstream codeText;
+        codeText << code;
+        testCopyAssign(code, codeText.str());
+    }
 }
 
 TEST_CASE("test parsing of foo and srcML::swap") {
@@ -98,18 +100,21 @@ TEST_CASE("test parsing of foo and srcML::swap") {
 
     REQUIRE(fooStream.str() == fooParsedStream.str());
 
-    srcML initiallyEmpty;
-    initiallyEmpty.swap(foo);
-    std::stringstream parsedStreamForInitiallyEmpty;
-    parsedStreamForInitiallyEmpty << initiallyEmpty;
-    REQUIRE(fooStream.str() == parsedStreamForInitiallyEmpty.str());
+    SECTION("srcML::swap") {
+        srcML initiallyEmpty;
+        initiallyEmpty.swap(foo);
 
-    std::stringstream fooParsedStreamNowEmpty;
-    fooParsedStreamNowEmpty << foo;
-    REQUIRE("" == fooParsedStreamNowEmpty.str());
+        std::stringstream parsedStreamForInitiallyEmpty;
+        parsedStreamForInitiallyEmpty << initiallyEmpty;
+        REQUIRE(fooStream.str() == parsedStreamForInitiallyEmpty.str());
+
+        std::stringstream fooParsedStreamNowEmpty;
+        fooParsedStreamNowEmpty << foo;
+        REQUIRE("" == fooParsedStreamNowEmpty.str());
+    }
 }
 
-TEST_CASE("test AST::getChild and copy assign") {
+TEST_CASE("AST") {
     std::string a = "ayy";
     std::string b = "bee";
     std::string c = "sea";
@@ -123,26 +128,30 @@ TEST_CASE("test AST::getChild and copy assign") {
     astAB->child.push_back(std::move(astA));
     astAB->child.push_back(std::move(astB));
 
-    std::shared_ptr<AST> childAn;
-    childAn = astC->getChild(a);
-    REQUIRE(childAn == nullptr);
+    SECTION("AST::getChild") {
+        std::shared_ptr<AST> childAn;
+        childAn = astC->getChild(a);
+        REQUIRE(childAn == nullptr);
 
-    std::shared_ptr<AST> childA;
-    childA = astAB->getChild(a);
-    REQUIRE(childA != nullptr);
-    REQUIRE(childA->tag == a);
+        std::shared_ptr<AST> childA;
+        childA = astAB->getChild(a);
+        REQUIRE(childA != nullptr);
+        REQUIRE(childA->tag == a);
+    }
 
-    // swap astAB and astC
-    std::swap(astAB, astC);
+    SECTION("AST::swap") {
+        // swap astAB and astC
+        std::swap(astAB, astC);
 
-    // astAB should now be leaf "sea"
-    std::shared_ptr<AST> childAfromAB;
-    childAfromAB = astAB->getChild(a);
-    REQUIRE(childAfromAB == nullptr);
+        // astAB should now be leaf "sea"
+        std::shared_ptr<AST> childAfromAB;
+        childAfromAB = astAB->getChild(a);
+        REQUIRE(childAfromAB == nullptr);
 
-    // astC should now be "ayybees", containing astA and astB
-    std::shared_ptr<AST> childAfromC;
-    childAfromC = astC->getChild(a);
-    REQUIRE(childAfromC != nullptr);
-    REQUIRE(childAfromC->tag == a);
+        // astC should now be "ayybees", containing astA and astB
+        std::shared_ptr<AST> childAfromC;
+        childAfromC = astC->getChild(a);
+        REQUIRE(childAfromC != nullptr);
+        REQUIRE(childAfromC->tag == a);
+    }
 }
