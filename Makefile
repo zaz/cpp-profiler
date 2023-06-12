@@ -30,17 +30,20 @@ msg:
 	@echo '  check     - Tests for memory leaks using Valgrind.'
 
 ###############################################################
-profiler: main.o ASTree.o
-	$(CPP) $(CPP_OPTS) -o profiler main.o ASTree.o
+profiler: main.o profileFiles.o ASTree.o
+	$(CPP) $(CPP_OPTS) -o profiler main.o profileFiles.o ASTree.o
 
-test: test.o ASTree.o
-	$(CPP) $(CPP_OPTS) -o test test.o ASTree.o
+test: test.o profileFiles.o ASTree.o
+	$(CPP) $(CPP_OPTS) -o test test.o profileFiles.o ASTree.o
 
 main.o: main.cpp ASTree.hpp
 	$(CPP) $(CPP_OPTS) -c main.cpp
 
 test.o: test.cpp ASTree.hpp
 	$(CPP) $(CPP_OPTS) -c test.cpp
+
+profileFiles.o: profileFiles.cpp profileFiles.hpp
+	$(CPP) $(CPP_OPTS) -c profileFiles.cpp
 
 ASTree.o: ASTree.hpp ASTree.cpp
 	$(CPP) $(CPP_OPTS) -c ASTree.cpp
