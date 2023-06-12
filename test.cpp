@@ -36,20 +36,25 @@ void testCopyAssign(srcML p, std::string codeText) {
 }
 
 TEST_CASE("monolithic test") {
-    srcML                    code;      //Source code to be profiled.
+    srcML                    code;        //Source code to be profiled.
     std::vector<std::string> inFileName = {"tests/simple.cpp"};
     std::vector<std::string> inputName;
     std::vector<std::string> profileName;
+    std::vector<std::string> outFileNames;
 
     for (auto const& file : inFileName) {
         // parse input as file path
-        std::filesystem::path inputPath(file);
+        auto inFilePath = std::filesystem::path(file);
         std::string temp = file + ".xml";  //Add .xml
         inputName.push_back(temp);                         //Put in list
         std::string name = file;
         std::replace(name.begin(), name.end(), '.', '_');  //convert . to _
         // TODO: determine if we also need to replace "/"
         profileName.push_back(name);                       //Put in list
+        auto outFile = inFilePath.parent_path();
+        outFile /= "p-";
+        outFile += inFilePath.filename();
+        outFileNames.push_back(outFile);
     }
 
     std::ifstream inFile(inputName[0].c_str());    //Read in the main
